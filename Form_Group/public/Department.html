@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Document</title>
+</head>
+<body>
+    <form action="./redirect.php" method="post" class=" flex justify-center items-center min-h-screen">
+        <div class="w-[250px] h-[290px] border-2 border-blue-400 flex flex-col gap-4 p-4 justify-center items-center">
+            <h1 class="text-2xl mb-5 text-green-600">Selection</h1>
+            <div class="flex flex-col ml-[-28px]">
+                <label>Select Year</label>
+                <select name="Year" class="border-2 border-red-400  mb-2  w-[90px]">
+                    <option value="1">I</option>
+                    <option value="2">II</option>
+                    <option value="3">III</option>
+                    <option value="4">IV</option>
+                </select>
+            </div>
+            <div class="flex flex-col ml-2">
+                <label>Select Department</label>
+                <select name="Department" class="border-2 border-red-400 mb-3 ">
+                    <option value="CSE">CSE</option>
+                    <option value="ECE">ECE</option>
+                    <option value="MECH">MECH</option>
+                    <option value="CIVIL">CIVIL</option>
+                     <option value="MBA">MBA</option>
+                    <option value="MCA">MCA</option>
+                    <option value="IT">IT</option>
+                    <option value="EEE">EEE</option>
+                     <option value="AIML">AIML</option>
+                    <option value="AIDS">AIDS</option>
+                    <option value="FIRSTYEAR">FIRSTYEAR</option>
+                    
+                </select>
+            </div>
+            <div>
+                <button class="border-2 border-blue-400 p-1 bg-blue-700">Submit</button>
+            </div>
+        </div>
+    </form>
+    
+</body>
+</html>
