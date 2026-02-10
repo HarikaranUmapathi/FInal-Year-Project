@@ -1,31 +1,59 @@
 <?php
-
 require_once '../config/db.php';
 session_start();
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $name     = trim($_POST['Name']);
     $password = trim($_POST['Password']);
-    $role     = $_POST['Role'];
+    $role     = trim($_POST['Role']); // Role selected from form
 
-    if ($name != '' && $password != '') {
+    if ($name !== '' && $password !== '' && $role !== '') {
 
-        $sql = "SELECT * FROM student1 WHERE name=? AND role=?";
+        // Determine which table to check based on role
+        if ($role === 'Faculty') {
+            $table = 'faculty1';
+        } else {
+            $table = 'student1';
+        }
+
+        // Prepare statement
+        $sql = "SELECT * FROM $table WHERE Name = ?";
         $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, "ss", $name, $role);
+        mysqli_stmt_bind_param($stmt, "s", $name);
         mysqli_stmt_execute($stmt);
-
         $result = mysqli_stmt_get_result($stmt);
+        echo "<script>console.log('Password from DB: " . $row['Password'] . "');</script>";
 
         if ($row = mysqli_fetch_assoc($result)) {
+            echo "<script>console.log('Password from DB: " . $row['Password'] . "');</script>";
+            // Check password (bcrypt)
+            if (password_verify($password, $row['Password'])) {
 
-            // PASSWORD CHECK
-            if (password_verify($password, $row['Password'])) { 
+                // Set session
                 $_SESSION['User'] = $row['Name'];
                 $_SESSION['Role'] = $row['Role'];
-                
-                header("Location: Department.php");
+
+                // Role-based redirect
+                switch ($row['Role']) {
+                    case 'Student':
+                        header("Location: Department.html");
+                        break;
+
+                    case 'Faculty':
+                        header("Location: Faculty.html");
+                        break;
+
+                    case 'Admin':
+                        header("Location: Admin.html");
+                        break;
+
+                    default:
+                        $error = "Invalid role in database";
+                        break;
+                }
                 exit();
+
             } else {
                 $error = "Invalid password";
             }
@@ -33,15 +61,18 @@ session_start();
         } else {
             $error = "User not found";
         }
+
     } else {
         $error = "Please fill in all fields";
     }
-    }
-    if (isset($error)) {    
-        echo "<script>alert('$error');</script>";
-    }   
-    
+}
+
+// Display error if exists
+if (isset($error)) {
+    echo "<script>alert('$error');</script>";
+}
 ?>
+
 
 
 <!DOCTYPE html>
