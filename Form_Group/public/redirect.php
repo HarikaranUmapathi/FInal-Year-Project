@@ -7,6 +7,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $department = $_POST["Department"];
 
     $_SESSION['year'] = $year;
+    $_SESSION['dept'] = $department;
+    
 
     if ($_SESSION['Role'] == "Student") {
 
@@ -203,6 +205,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
                 break;
 
+            case "AIDS":
+                switch ($year) {
+                    case "1":
+                        header("Location: Faculty_Department/CSE/1CSEFaculty.html");
+                        exit();
+                    case "2":
+                        header("Location: College_Department/AIDS/2FAIDS.html");
+                        exit();
+                    case "3":
+                        header("Location: College_Department/AIDS/3FAIDS.html");
+                        exit();
+                    case "4":
+                        header("Location: College_Department/AIDS/4FAIDS.html");
+                        exit();
+                }
+                break;
             default:
                 echo "Invalid Department for Faculty";
         }

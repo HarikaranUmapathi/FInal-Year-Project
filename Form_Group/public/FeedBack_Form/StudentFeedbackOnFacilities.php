@@ -5,7 +5,7 @@ session_start();
 $success = false;
 $message = "";
 
-/* ===== CREATE TABLE IF NOT EXISTS ===== */
+/* ===== CREATE TABLE ===== */
 $sql = "CREATE TABLE IF NOT EXISTS feedback_facilities (
   id INT AUTO_INCREMENT PRIMARY KEY,
   email VARCHAR(255),
@@ -19,7 +19,7 @@ $sql = "CREATE TABLE IF NOT EXISTS feedback_facilities (
 )";
 mysqli_query($conn, $sql);
 
-/* ===== FORM SUBMISSION ===== */
+/* ===== FORM SUBMIT ===== */
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
   $email  = $_POST['email'];
@@ -37,8 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $message = "Please answer all questions";
   } else {
 
-    $stmt = mysqli_prepare(
-      $conn,
+    $stmt = mysqli_prepare($conn,
       "INSERT INTO feedback_facilities
       (email,name,branch,year,mobile,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12)
       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
@@ -46,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     mysqli_stmt_bind_param(
       $stmt,
-      "ssssiiiiiiiiiiii",
+      "sssssiiiiiiiiiiii",
       $email, $name, $branch, $year, $mobile,
       $answers[1], $answers[2], $answers[3], $answers[4], $answers[5], $answers[6],
       $answers[7], $answers[8], $answers[9], $answers[10], $answers[11], $answers[12]
@@ -59,22 +58,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       $message = "Database error!";
     }
   }
-}
-
-/* ===== FETCH AVERAGES ===== */
-$avgQuery = "SELECT
-  COUNT(*) AS total,
-  AVG(q1) q1, AVG(q2) q2, AVG(q3) q3, AVG(q4) q4,
-  AVG(q5) q5, AVG(q6) q6, AVG(q7) q7, AVG(q8) q8,
-  AVG(q9) q9, AVG(q10) q10, AVG(q11) q11, AVG(q12) q12
-  FROM feedback_facilities";
-
-$result = mysqli_query($conn, $avgQuery);
-$data = mysqli_fetch_assoc($result);
-
-$averages = [];
-for ($i = 1; $i <= 12; $i++) {
-  $averages[] = round($data["q$i"], 2);
 }
 
 $questions = [
@@ -96,9 +79,8 @@ $questions = [
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Student Feedback</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<title>Student Feedback</title>
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-gray-100">
@@ -137,37 +119,12 @@ $questions = [
 <button class="bg-blue-600 text-white px-6 py-2 mt-4">Submit</button>
 
 </form>
-</div>
 
-<!-- ===== GRAPH ===== -->
-<?php if ($data['total'] > 0): ?>
-<div class="max-w-4xl mx-auto bg-white p-6 mt-6 shadow">
-<h3 class="font-bold mb-2">Average Feedback Graph</h3>
-<canvas id="chart"></canvas>
-</div>
+<a href="feedback_facilities_graph.php" class="text-blue-600 font-semibold mt-6 block">
+View Feedback Graph →
+</a>
 
-<script>
-new Chart(document.getElementById("chart"), {
-  type: "bar",
-  data: {
-    labels: <?= json_encode($questions) ?>,
-    datasets: [{
-      label: "Average Rating",
-      data: <?= json_encode($averages) ?>,
-      backgroundColor: "rgba(59,130,246,0.6)"
-    }]
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true,
-        max: 5
-      }
-    }
-  }
-});
-</script>
-<?php endif; ?>
+</div>
 
 </body>
 </html>

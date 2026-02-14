@@ -2,76 +2,69 @@
 require_once '../config/db.php';
 session_start();
 
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $name     = trim($_POST['Name']);
     $password = trim($_POST['Password']);
-    $role     = trim($_POST['Role']); // Role selected from form
+    $_SESSION['name'] = $name;
+    if ($name !== '' && $password !== '') {
 
-    if ($name !== '' && $password !== '' && $role !== '') {
+        $row = null;
 
-        // Determine which table to check based on role
-        if ($role === 'Faculty') {
-            $table = 'faculty1';
-        } else {
-            $table = 'student1';
+        // 1️⃣ First check student table
+        $stmt = $conn->prepare("SELECT * FROM students WHERE Name = ?");
+        $stmt->bind_param("s", $name);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+
+        // 2️⃣ If not found, check faculty table
+        if (!$row) {
+            $stmt = $conn->prepare("SELECT * FROM faculty WHERE Name = ?");
+            $stmt->bind_param("s", $name);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
         }
 
-        // Prepare statement
-        $sql = "SELECT * FROM $table WHERE Name = ?";
-        $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, "s", $name);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-        echo "<script>console.log('Password from DB: " . $row['Password'] . "');</script>";
+        // 3️⃣ If user found and password matches
+        if ($row && password_verify($password, $row['password'])) {
 
-        if ($row = mysqli_fetch_assoc($result)) {
-            echo "<script>console.log('Password from DB: " . $row['Password'] . "');</script>";
-            // Check password (bcrypt)
-            if (password_verify($password, $row['Password'])) {
+            $_SESSION['User'] = $row['name'];
+            $_SESSION['Role'] = $row['role'];
 
-                // Set session
-                $_SESSION['User'] = $row['Name'];
-                $_SESSION['Role'] = $row['Role'];
+            // 4️⃣ Role-based redirect
+            switch ($row['role']) {
+                case 'Student':
+                    header("Location: Department.html");
+                    break;
 
-                // Role-based redirect
-                switch ($row['Role']) {
-                    case 'Student':
-                        header("Location: Department.html");
-                        break;
+                case 'Faculty':
+                    header("Location: Department.html");
+                    break;
 
-                    case 'Faculty':
-                        header("Location: Faculty.html");
-                        break;
+                case 'Admin':
+                    header("Location: Admin.html");
+                    break;
 
-                    case 'Admin':
-                        header("Location: Admin.html");
-                        break;
-
-                    default:
-                        $error = "Invalid role in database";
-                        break;
-                }
-                exit();
-
-            } else {
-                $error = "Invalid password";
+                default:
+                    echo "<script>alert('Invalid role in database');</script>";
+                    break;
             }
+            exit();
 
         } else {
-            $error = "User not found";
+            echo "<script>alert('Invalid username or password');</script>";
         }
 
     } else {
-        $error = "Please fill in all fields";
+        echo "<script>alert('Please fill in all fields');</script>";
     }
 }
-
-// Display error if exists
-if (isset($error)) {
-    echo "<script>alert('$error');</script>";
-}
 ?>
+
 
 
 
