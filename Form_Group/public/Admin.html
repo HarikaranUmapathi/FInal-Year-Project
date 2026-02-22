@@ -1,96 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Admin Dashboard</title>
 </head>
-<body>
-    <nav class="flex flex-row text-xl justify-between">
-        <h1>Admin Page</h1>
-        <a href="/College_Department/CSE.html">CSE</a>
-        <a href="/College_Department/IT.html">IT</a>
-        <a href="/College_Department/Mechanical.html">MECHANICAL</a>
-        <a href="/College_Department/Civil.html">CIVIL</a>
-        <a href="/College_Department/MBA.html">MBA</a>
-        <a href="/College_Department/MCA.html">MCA</a>
-        <a href="./College_Department/EEE.html">EEE</a>
-        <a href="/College_Department/ECE.html">ECE</a>
-        <a href="/College_Department/AIML.html">AIML</a>
-        <a href="/College_Department/FirstYear.html">FIRST YEAR</a>
-        <a href="/College_Department/AIDS.html">AIDS</a>
-        <a href="/Login.html">Logout</a>
+
+<body class="bg-gray-100">
+    <nav class="bg-blue-600 text-white p-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Admin Dashboard</h1>
+            <div class="space-x-4">
+                <a href="add_users.php" class="bg-green-500 px-4 py-2 rounded hover:bg-green-600">Add Users</a>
+                <a href="Analytics.php" class="bg-purple-500 px-4 py-2 rounded hover:bg-purple-600">Analytics</a>
+                <a href="Login.php" class="bg-red-500 px-4 py-2 rounded hover:bg-red-600">Logout</a>
+            </div>
+        </div>
     </nav>
 
-    <div class="flex flex-row  mt-[100px] ml-[100px] text-xl">
-        <div class="m-4">
-            <label>Name</label>
-            <input class="border-2 border-red-400" type="text" required name="Name">
-        </div>
-        <div class="m-4">
-            <label>Password</label>
-            <input type="password" class="border-2 border-red-400"  required name="Password">
-        </div>
-        <div class="m-4" >
-            <label>Role</label>
-            <select class="border-2 border-red-500 w-[190px]">
-                <option value="faculty">Faculty</option>
-                <option value="student">Student</option>
-                <option value="admin">Admin</option>
-            </select>
-        </div>
-    </div>
+    <div class="max-w-6xl mx-auto mt-8 p-6 bg-white shadow rounded">
+        <h2 class="text-xl font-bold mb-4">Welcome, Admin!</h2>
+        <p class="mb-6">Use the navigation above to manage users and view analytics.</p>
 
-    <div class="flex flex-row m-4 ml-[100px] text-xl ">
-        <div class="m-4">
-            <label>Select Year</label>
-            <select name="Year" class="border-2 border-red-400  mb-2  w-[90px]">
-                <option value="1">I</option>
-                <option value="2">II</option>
-                <option value="3">III</option>
-                <option value="4">IV</option>
-            </select>
-        </div>
-        <div class=" m-4">
-            <label>Select Department</label>
-            <select name="Department" class="border-2 border-red-400 mb-3 ">
-                <option value="CSE">CSE</option>
-                <option value="ECE">ECE</option>
-                <option value="MECH">MECH</option>
-                <option value="CIVIL">CIVIL</option>
-                 <option value="MBA">MBA</option>
-                <option value="MCA">MCA</option>
-                <option value="IT">IT</option>
-                <option value="EEE">EEE</option>
-                <option value="AIML">AIML</option>
-                <option value="AIDS">AIDS</option>
-                <option value="FIRSTYEAR">FIRSTYEAR</option>
-                    
-            </select>
-        </div>
-
-        <div class="m-4">
-            <button name="adddata" type="submit" class="border-2 border-red-500 bg-blue-700 p-1">ADD</button>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-blue-100 p-4 rounded shadow">
+                <h3 class="font-bold text-lg mb-2">Manage Users</h3>
+                <p>Add, edit, or remove students and faculty accounts.</p>
+                <a href="add_users.php" class="text-blue-600 mt-2 inline-block">Go to Add Users →</a>
+            </div>
+            <div class="bg-green-100 p-4 rounded shadow">
+                <h3 class="font-bold text-lg mb-2">View Analytics</h3>
+                <p>Check feedback analytics and reports.</p>
+                <a href="Analytics.php" class="text-green-600 mt-2 inline-block">Go to Analytics →</a>
+            </div>
+            <div class="bg-purple-100 p-4 rounded shadow">
+                <h3 class="font-bold text-lg mb-2">Department Access</h3>
+                <p>Access department-specific pages.</p>
+                <div class="mt-2 space-y-1">
+                    <a href="College_Department/CSE.html" class="text-purple-600 block">CSE</a>
+                    <a href="College_Department/IT.html" class="text-purple-600 block">IT</a>
+                    <!-- Add more as needed -->
+                </div>
+            </div>
         </div>
     </div>
-    <div class="flex flex-column text-2xl mt-[200px] ml-[100px]">
-        <div class="mr-[100px]">
-            <label>FeedbackName</label>
-            <input name="feedbackname" type="text" class="border-2 border-red-400">
-        </div>
-        <div>
-            <label>URL</label>
-            <input name="url" type="text" class="border-2 border-red-400">
-        </div>
-        <div class="ml-[100px]">
-            <button name="add link" class="border-2 border-red-500 bg-blue-700 p-1">ADD</button>
-        </div>
-         <div class="ml-[100px]">
-            <button name="delete" class="border-2 border-red-500 bg-blue-700 p-1">Delete</button>
-        </div>
-    </div>
-    
-    
 </body>
+
 </html>

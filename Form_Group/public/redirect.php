@@ -221,9 +221,142 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         exit();
                 }
                 break;
+                case "AIML":
+                switch ($year) {
+                    case "1":
+                        header("Location: Faculty_Department/CSE/1CSEFaculty.html");
+                        exit();
+                    case "2":
+                        header("Location: College_Department/CSE/2FAIML.html");
+                        exit();
+                    case "3":
+                        header("Location: College_Department/CSE/3FAIML.html");
+                        exit();
+                    case "4":
+                        header("Location: College_Department/CSE/4FAIML.html");
+                        exit();
+                }
+                break;
+
+            case "Civil":
+                switch ($year) {
+                    case "1":
+                        header("Location: Faculty_Department/CSE/1CSEFaculty.html");
+                        exit();
+                    case "2":
+                        header("Location: College_Department/AIDS/2FCivil.html");
+                        exit();
+                    case "3":
+                        header("Location: College_Department/AIDS/3FCivil.html");
+                        exit();
+                    case "4":
+                        header("Location: College_Department/AIDS/4FCivil.html");
+                        exit();
+                }
+                break;
+                case "ECE":
+                switch ($year) {
+                    case "1":
+                        header("Location: Faculty_Department/CSE/1CSEFaculty.html");
+                        exit();
+                    case "2":
+                        header("Location: College_Department/CSE/2FECE.html");
+                        exit();
+                    case "3":
+                        header("Location: College_Department/CSE/3FECE.html");
+                        exit();
+                    case "4":
+                        header("Location: College_Department/CSE/4FECE.html");
+                        exit();
+                }
+                break;
+
+            case "EEE":
+                switch ($year) {
+                    case "1":
+                        header("Location: Faculty_Department/CSE/1CSEFaculty.html");
+                        exit();
+                    case "2":
+                        header("Location: College_Department/AIDS/2FEEE.html");
+                        exit();
+                    case "3":
+                        header("Location: College_Department/AIDS/3FEEE.html");
+                        exit();
+                    case "4":
+                        header("Location: College_Department/AIDS/4FEEE.html");
+                        exit();
+                }
+                break;
+                case "IT":
+                switch ($year) {
+                    case "1":
+                        header("Location: Faculty_Department/CSE/1CSEFaculty.html");
+                        exit();
+                    case "2":
+                        header("Location: College_Department/CSE/2FIT.html");
+                        exit();
+                    case "3":
+                        header("Location: College_Department/CSE/3FIT.html");
+                        exit();
+                    case "4":
+                        header("Location: College_Department/CSE/4FIT.html");
+                        exit();
+                }
+                break;
+
+            case "MBA":
+                switch ($year) {
+                    case "1":
+                        header("Location: Faculty_Department/CSE/1CSEFaculty.html");
+                        exit();
+                    case "2":
+                        header("Location: College_Department/AIDS/2FMBA.html");
+                        exit();
+                    case "3":
+                        header("Location: College_Department/AIDS/3FMBA.html");
+                        exit();
+                    case "4":
+                        header("Location: College_Department/AIDS/4FMBA.html");
+                        exit();
+                }
+                break;
+                
+            case "MCA":
+                switch ($year) {
+                    case "1":
+                        header("Location: Faculty_Department/CSE/1CSEFaculty.html");
+                        exit();
+                    case "2":
+                        header("Location: College_Department/AIDS/2FMCA.html");
+                        exit();
+                    case "3":
+                        header("Location: College_Department/AIDS/3FMCA.html");
+                        exit();
+                    case "4":
+                        header("Location: College_Department/AIDS/4FMCA.html");
+                        exit();
+                }
+                break;
+                case "Mechanical":
+                switch ($year) {
+                    case "1":
+                        header("Location: Faculty_Department/CSE/1CSEFaculty.html");
+                        exit();
+                    case "2":
+                        header("Location: College_Department/CSE/2FMechanical.html");
+                        exit();
+                    case "3":
+                        header("Location: College_Department/CSE/3FMechanical.html");
+                        exit();
+                    case "4":
+                        header("Location: College_Department/CSE/4FMechanical.html");
+                        exit();
+                }
+                break;
             default:
                 echo "Invalid Department for Faculty";
         }
+        
 
     }
     else {

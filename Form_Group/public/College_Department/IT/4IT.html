@@ -3,14 +3,277 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <title>Document</title>
+    <title>IT Department - Fourth Year Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .header-title {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .header-title h1 {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .header-title p {
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .login-btn, .faculty-btn {
+            background: white;
+            color: #667eea;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .login-btn:hover, .faculty-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .feedback-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feedback-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-top: 4px solid #667eea;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feedback-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 30px rgba(0, 0, 0, 0.15);
+            border-top-color: #764ba2;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-description {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .card-link {
+            color: #667eea;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .card-link:hover {
+            color: #764ba2;
+            transform: translateX(4px);
+        }
+
+        .faculty-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .faculty-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .faculty-section p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header-title h1 {
+                font-size: 1.5rem;
+            }
+
+            .header-actions {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .feedback-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .container {
+                padding: 1.5rem 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-     <div class="flex  justify-between mx-7 my-4 text-xl">
-        <h1>IT Department Dashboard</h1>
-        <h1>Fourth Year</h1>
-        <a href="../../Login.php">Logout</a>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <div class="header-title">
+                <h1>IT Department Dashboard</h1>
+                <p>Fourth Year - Student Feedback Portal</p>
+            </div>
+            <div class="header-actions">
+                <a href="../../Login.php" class="login-btn">Login</a>
+                <a href="./4FIT.html" class="faculty-btn">Faculty Dashboard</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h2 class="section-title">📋 Available Feedback Forms</h2>
+
+        <!-- Feedback Cards Grid -->
+        <div class="feedback-grid">
+            <!-- Faculty Feedback -->
+            <a href="../../FeedBack_Form/StudentFeedBackFormFaculty.php" class="feedback-card">
+                <div class="card-icon">👨‍🏫</div>
+                <h3 class="card-title">Faculty Feedback</h3>
+                <p class="card-description">Rate and provide feedback on faculty teaching quality, support, and effectiveness.</p>
+                <span class="card-link">Fill Form →</span>
+            </a>
+
+            <!-- Facilities Feedback -->
+            <a href="../../FeedBack_Form/StudentFeedbackOnFacilities.php" class="feedback-card">
+                <div class="card-icon">🏫</div>
+                <h3 class="card-title">Campus Facilities</h3>
+                <p class="card-description">Share your feedback on campus infrastructure, amenities, and facilities.</p>
+                <span class="card-link">Fill Form →</span>
+            </a>
+
+            <!-- Guest Lecture Feedback -->
+            <a href="../../FeedBack_Form/GuestLectureFeedbackFromGuest.php" class="feedback-card">
+                <div class="card-icon">🎤</div>
+                <h3 class="card-title">Guest Lecture Feedback</h3>
+                <p class="card-description">Rate guest lectures and share your learning experience and suggestions.</p>
+                <span class="card-link">Fill Form →</span>
+            </a>
+
+            <!-- Course End Survey -->
+            <a href="../../FeedBack_Form/CourseEndSurvey.php" class="feedback-card">
+                <div class="card-icon">📊</div>
+                <h3 class="card-title">Course End Survey</h3>
+                <p class="card-description">Evaluate course content, delivery, and overall learning outcomes.</p>
+                <span class="card-link">Fill Form →</span>
+            </a>
+
+            <!-- Parent Feedback -->
+            <a href="../../FeedBack_Form/ParentFeedbackForm.php" class="feedback-card">
+                <div class="card-icon">👨‍👩‍👧</div>
+                <h3 class="card-title">Parent Feedback</h3>
+                <p class="card-description">Parents can share feedback on college discipline, infrastructure, and placement support.</p>
+                <span class="card-link">Fill Form →</span>
+            </a>
+
+            <!-- Alumni Feedback -->
+            <a href="../../FeedBack_Form/AluminiFeedbackForm.php" class="feedback-card">
+                <div class="card-icon">🎓</div>
+                <h3 class="card-title">Alumni Feedback</h3>
+                <p class="card-description">Alumni can provide feedback on career success and institutional effectiveness.</p>
+                <span class="card-link">Fill Form →</span>
+            </a>
+        </div>
+
+        <!-- Faculty Section -->
+        <div class="faculty-section">
+            <h2>Faculty Dashboard Access</h2>
+            <p>Faculty members can access their dashboard to view student feedback and analytics.</p>
+            <a href="./4FIT.html" class="faculty-btn" style="display: inline-block; margin: 0;">Go to Faculty Dashboard</a>
+        </div>
     </div>
 </body>
 </html>

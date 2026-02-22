@@ -43,23 +43,190 @@ $questions = [
   <title>CSE HOD - Feedback Averages</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .header-title {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .header-title h1 {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .header-title p {
+      font-size: 1rem;
+      opacity: 0.95;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .login-btn, .back-btn {
+      background: white;
+      color: #667eea;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .login-btn:hover, .back-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    .chart-section {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+      border: 1px solid #e5e7eb;
+      margin-bottom: 2rem;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .stats-card {
+      background: #f9fafb;
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+      border: 1px solid #e5e7eb;
+    }
+
+    .stats-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #667eea;
+      margin-bottom: 0.5rem;
+    }
+
+    .stats-label {
+      color: #6b7280;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        padding: 2rem 1rem;
+      }
+
+      .header-title h1 {
+        font-size: 1.5rem;
+      }
+
+      .header-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .container {
+        padding: 1rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
-<body class="bg-white font-sans p-6">
-  <div class="max-w-4xl mx-auto">
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-bold">CSE Department — Aggregated Feedback</h1>
-      <a href="../../Login.php" class="text-sm">Login</a>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <div class="header-title">
+        <h1>CSE Department</h1>
+        <p>HOD Analytics Dashboard</p>
+      </div>
+      <div class="header-actions">
+        <a href="../../Login.php" class="login-btn">Logout</a>
+        <a href="2CSE.html" class="back-btn">Back to Department</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stats-card">
+        <div class="stats-value"><?php echo $totalResponses; ?></div>
+        <div class="stats-label">Total Responses</div>
+      </div>
+      <div class="stats-card">
+        <div class="stats-value">CSE</div>
+        <div class="stats-label">Department</div>
+      </div>
+      <div class="stats-card">
+        <div class="stats-value">HOD</div>
+        <div class="stats-label">Access Level</div>
+      </div>
+      <div class="stats-card">
+        <div class="stats-value">Real-time</div>
+        <div class="stats-label">Data Updates</div>
+      </div>
     </div>
 
-    <?php if ($totalResponses > 0): ?>
-      <p class="mb-4">Total responses: <strong><?php echo $totalResponses; ?></strong></p>
-      <canvas id="deptChart" height="120"></canvas>
-    <?php else: ?>
-      <p class="text-gray-600">No feedback responses for CSE yet.</p>
-    <?php endif; ?>
-
-    <div class="mt-6">
-      <a href="2CSE.html" class="underline">Back to department page</a>
+    <div class="chart-section">
+      <h2 class="section-title">CSE Department — Aggregated Feedback</h2>
+      <?php if ($totalResponses > 0): ?>
+        <canvas id="deptChart" height="120"></canvas>
+      <?php else: ?>
+        <p class="text-gray-600 text-center py-8">No feedback responses for CSE yet.</p>
+      <?php endif; ?>
     </div>
   </div>
 
@@ -75,17 +242,24 @@ $questions = [
         datasets: [{
           label: 'Average score',
           data: data,
-          backgroundColor: 'rgba(16,185,129,0.7)',
-          borderColor: 'rgba(16,185,129,1)',
+          backgroundColor: 'rgba(102, 126, 234, 0.7)',
+          borderColor: 'rgba(102, 126, 234, 1)',
           borderWidth: 1
         }]
       },
       options: {
+        responsive: true,
         scales: {
           y: {
             beginAtZero: true,
             suggestedMax: 5,
             ticks: { stepSize: 1 }
+          }
+        },
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top'
           }
         }
       }

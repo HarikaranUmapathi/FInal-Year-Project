@@ -2,6 +2,24 @@
 require_once __DIR__ . '/../../config/db.php';
 session_start();
 
+// Create table if not exists
+mysqli_query($conn, "CREATE TABLE IF NOT EXISTS alumni_feedback (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255),
+    name VARCHAR(255),
+    branch VARCHAR(100),
+    pass_year VARCHAR(20),
+    mobile VARCHAR(20),
+    feedback_type VARCHAR(50),
+    q1 INT, q2 INT, q3 INT, q4 INT, q5 INT,
+    q6 INT, q7 INT, q8 INT, q9 INT, q10 INT,
+    q11 INT, q12 INT, q13 INT, q14 INT, q15 INT,
+    q16 INT, q17 INT, q18 INT, q19 INT, q20 INT,
+    q21 INT, q22 INT,
+    suggestion TEXT,
+    submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)");
+
 /* ================= FETCH AVERAGES ================= */
 $avgSql = "SELECT
 COUNT(*) total,

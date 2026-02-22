@@ -3,44 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <title>Document</title>
+    <title>Department Selection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            margin: 2rem;
+        }
+
+        .title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .label {
+            display: block;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            transition: all 0.3s;
+        }
+
+        .select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(102, 126, 234, 0.4);
+        }
+
+        .analytics-link {
+            display: block;
+            text-align: center;
+            margin-top: 2rem;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .analytics-link:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+
+            .title {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <form action="./redirect.php" method="post" class=" flex justify-center items-center min-h-screen">
-        <div class="w-[250px] h-[290px] border-2 border-blue-400 flex flex-col gap-4 p-4 justify-center items-center">
-            <h1 class="text-2xl mb-5 text-green-600">Selection</h1>
-            <div class="flex flex-col ml-[-28px]">
-                <label>Select Year</label>
-                <select name="Year" class="border-2 border-red-400  mb-2  w-[90px]">
-                    <option value="1">I</option>
-                    <option value="2">II</option>
-                    <option value="3">III</option>
-                    <option value="4">IV</option>
+    <div class="container">
+        <h1 class="title">Department Selection</h1>
+        <form action="./redirect.php" method="post">
+            <div class="form-group">
+                <label class="label" for="year">Select Year</label>
+                <select name="Year" id="year" class="select" required>
+                    <option value="1">I Year</option>
+                    <option value="2">II Year</option>
+                    <option value="3">III Year</option>
+                    <option value="4">IV Year</option>
                 </select>
             </div>
-            <div class="flex flex-col ml-2">
-                <label>Select Department</label>
-                <select name="Department" class="border-2 border-red-400 mb-3 ">
-                    <option value="CSE">CSE</option>
-                    <option value="ECE">ECE</option>
-                    <option value="MECH">MECH</option>
-                    <option value="CIVIL">CIVIL</option>
-                     <option value="MBA">MBA</option>
-                    <option value="MCA">MCA</option>
-                    <option value="IT">IT</option>
-                    <option value="EEE">EEE</option>
-                     <option value="AIML">AIML</option>
-                    <option value="AIDS">AIDS</option>
-                    <option value="FIRSTYEAR">FIRSTYEAR</option>
-                    
+
+            <div class="form-group">
+                <label class="label" for="department">Select Department</label>
+                <select name="Department" id="department" class="select" required>
+                    <option value="CSE">Computer Science Engineering</option>
+                    <option value="ECE">Electronics & Communication Engineering</option>
+                    <option value="MECH">Mechanical Engineering</option>
+                    <option value="CIVIL">Civil Engineering</option>
+                    <option value="MBA">Master of Business Administration</option>
+                    <option value="MCA">Master of Computer Applications</option>
+                    <option value="IT">Information Technology</option>
+                    <option value="EEE">Electrical & Electronics Engineering</option>
+                    <option value="AIML">Artificial Intelligence & Machine Learning</option>
+                    <option value="AIDS">AI & Data Science</option>
+                    <option value="FIRSTYEAR">First Year</option>
                 </select>
             </div>
-            <div>
-                <button class="border-2 border-blue-400 p-1 bg-blue-700">Submit</button>
-            </div>
-        </div>
-    </form>
-    
+
+            <button type="submit" class="submit-btn">Continue to Dashboard</button>
+        </form>
+
+        <a href="Analytics.php" class="analytics-link">Go to Analytics (Admin/Faculty Only)</a>
+    </div>
 </body>
 </html>

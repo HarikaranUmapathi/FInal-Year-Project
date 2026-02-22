@@ -1,6 +1,20 @@
 <?php
 require_once __DIR__ . '/../../config/db.php';
 
+// Create table if not exists
+mysqli_query($conn, "CREATE TABLE IF NOT EXISTS parent_feedback (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    student_name VARCHAR(100),
+    parent_name VARCHAR(100),
+    branch_batch VARCHAR(100),
+    phone VARCHAR(20),
+    email VARCHAR(100),
+    feedback_type VARCHAR(50),
+    q1 INT, q2 INT, q3 INT, q4 INT, q5 INT,
+    suggestion TEXT,
+    submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)");
+
 /* ===== FETCH AVERAGES ===== */
 $avgQuery = "SELECT
   COUNT(*) AS total,
